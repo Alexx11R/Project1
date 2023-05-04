@@ -1,0 +1,4 @@
+﻿1>------ Сборка начата: проект: Assembly-CSharp, Конфигурация: Debug Any CPU ------
+1>D:\prj\Pipe_Craft\Assets\Script\AimScript.cs(8,24,8,27): warning CS0649: Полю "AimScript.obj" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию null.
+1>  Assembly-CSharp -> D:\prj\Pipe_Craft\Temp\bin\Debug\Assembly-CSharp.dll
+========== Сборка: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
