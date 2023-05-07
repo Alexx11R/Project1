@@ -9,7 +9,8 @@ public class AimScript : MonoBehaviour
     public bool isAimed = false;
     public float distance = 0.1f;
     public Texture2D pricel;
-    public int crossHairWidth = 10, crossHairHeight = 10;
+    public int crossHairWidth = 50, crossHairHeight = 50;
+
     void LateUpdate()
     {
         Ray ray = obj.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);

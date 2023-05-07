@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class MouseMove : MonoBehaviour
 {
-    private float X, Y, Z;
+    private float X, Y;
     public int speeds;
     private float eulerX = 0, eulerY = 0;
-    // Use this for initialization
+    
     void Start()
     {
-        Cursor.visible = false;
+       // Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
         X = Input.GetAxis("Mouse X") * speeds * Time.deltaTime;
