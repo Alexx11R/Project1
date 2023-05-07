@@ -23,7 +23,6 @@ public class UserInterface : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
@@ -57,6 +56,7 @@ public class UserInterface : MonoBehaviour
         {
             if (mode == 0)
             {
+                controller.enabled = true;
                 MenuCanvas.SetActive(true);
                 GameCanvas.SetActive(false);
                 MapCanvas.SetActive(false);
@@ -68,20 +68,20 @@ public class UserInterface : MonoBehaviour
             {
                 if (mode == 1)
                 {
-                    
+                    controller.enabled = true;
                     MenuCanvas.SetActive(false);
                     GameCanvas.SetActive(true);
                     MapCanvas.SetActive(false);
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     mode = 0;
-                    controller.enabled = true;
                 }
             }
 
                   
         }
     }
+
     public void StartGame()
     {
         NowImage.SetActive(false);
@@ -93,6 +93,7 @@ public class UserInterface : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
     public void QuitGAme()
     {
         Application.Quit();

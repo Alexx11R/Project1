@@ -23,10 +23,5 @@ public class AimScript : MonoBehaviour
         else isAimed = false;
     }
 
-   
-
-
-
-
 }
 

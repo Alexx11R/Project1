@@ -15,21 +15,22 @@ public class PipeInfo : MonoBehaviour
     public GUIContent content;
     private Ray ray;
     AimScript a;
-        void Start()
+
+    void Start()
     {
        a = obj.GetComponent<AimScript>();
     }
     void Update()
     {
+        //a = obj.GetComponent<AimScript>();
+        inDist = a.isAimed;
       
-      inDist = a.isAimed;
-      
-     //   OnGUI();
+     //OnGUI();
     }
     void OnMouseEnter()
     {
         vis = true;
-        OnGUI();
+       // OnGUI();
       
     }
     void OnMouseExit()
