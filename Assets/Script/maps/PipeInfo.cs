@@ -11,7 +11,7 @@ public class PipeInfo : MonoBehaviour
     public bool vis;
     public float distance = 0.1f;
     public int width = 600, height = 600, posX = 10, posY = 10;
-    public string Info = "Smile if u wanna to give me a blowjob";
+    public string Info;
     public GUIContent content;
     private Ray ray;
     AimScript a;
