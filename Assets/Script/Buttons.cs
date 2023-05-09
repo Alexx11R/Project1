@@ -5,7 +5,7 @@ using UnityEngine;
 public class Buttons : MonoBehaviour
 {
     public GameObject img;
-    // Start is called before the first frame update
+
     void Start()
     {
         
