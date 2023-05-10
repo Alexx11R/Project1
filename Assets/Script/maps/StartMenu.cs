@@ -11,7 +11,7 @@ public class StartMenu : MonoBehaviour
     public GameObject ContinueImage;
     public GameObject StartImage;
     CharacterController controller;
-    public int mode = 2;// 0 - game, 1 - map, 2- menu
+    public int mode = 1;// 0 - authoriz, 1 - menu, 2 - game, 3 - map
 
     void Start()
     {
@@ -25,13 +25,14 @@ public class StartMenu : MonoBehaviour
 
     public void StartGame()
     {
+        Time.timeScale = 1f;
         StartImage.SetActive(false);
         ContinueImage.SetActive(true);
         ContinueImage.transform.localScale = new Vector2(1f, 1f);
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(true);
         //MapCanvas.SetActive(false);
-        mode = 0;
+        mode = 2;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -68,15 +69,19 @@ public class StartMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (mode == 0)
+            if (mode == 2)
             {
+                
                 controller.enabled = true;
-                MenuCanvas.SetActive(true);
+
                 GameCanvas.SetActive(false);
+                Time.timeScale = 0f;
+                MenuCanvas.SetActive(true);
+               
                // MapCanvas.SetActive(false);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                mode = 2;
+                mode = 1;
             }
             /* else
              {
