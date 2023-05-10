@@ -18,7 +18,7 @@ public class Buttons : MonoBehaviour
     {
         img.transform.localScale = new Vector2(1f, 1f);
     }
-    // Update is called once per frame
+
     void Update()
     {
         
