@@ -44,7 +44,6 @@ public class ChangeSettings : MonoBehaviour
                   resolution.height, Screen.fullScreen);
     }
 
-
     public void SetQuality(int qualityIndex)
     {
 
