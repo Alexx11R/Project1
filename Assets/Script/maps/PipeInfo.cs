@@ -11,11 +11,11 @@ public class PipeInfo : MonoBehaviour
     public bool inDist = false;
     public bool vis;
     public bool act;
-    public float distance = 0.1f;
-    public int width = 600, height = 600, posX = 10, posY = 10;
+   // public float distance = 0.1f;
+    //public int width = 600, height = 600, posX = 10, posY = 10;
     public string Info;
     public GUIContent content;
-    private Ray ray;
+    //private Ray ray;
     AimScript a;
     CanvasInteraction c;
 

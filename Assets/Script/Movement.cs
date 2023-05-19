@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         _charController = GetComponent<CharacterController>();
     }
 
