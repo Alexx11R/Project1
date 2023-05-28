@@ -16,11 +16,14 @@ public class CanvasInteraction : MonoBehaviour
     public int mode = 1;// 0 - authoriz, 1 - menu, 2 - game, 3 - map
     CharacterController controller;
     Teleport t;
-   // PipeInfo p;
-    
+    // PipeInfo p;
+    public WebManager manager;
+    //public string name;
+
 
     void Start()
     {
+        print("OK");
         controller = player.GetComponent<CharacterController>();
         t = player.GetComponent<Teleport>();
        // p = player.GetComponent<PipeInfo>();
@@ -29,6 +32,10 @@ public class CanvasInteraction : MonoBehaviour
         MapCanvas.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        manager = GetComponent<WebManager>();
+        //name = manager.nickname;
+       // print(name);
     }
 
     public void StartGame()
