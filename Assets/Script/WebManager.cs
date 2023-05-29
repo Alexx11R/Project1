@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,24 +22,26 @@ public class Error
 public class Player
 {
     public int id;
-    public string nickname;
+    public string rights;
 
     public Player()
     {
 
     }
 
-    public Player(string nick)
+    public Player(string _rights)                 
     {
-        nickname = nick;
+        rights = _rights;
     }
 
-    public void SetNickname(string name) => nickname = name;
+    public void SetRights(string rigt) => rights = rigt;
 }
 
 public class WebManager : MonoBehaviour
 {
     public static UserData userData = new UserData();
+
+    
 
     [SerializeField] private string targetURL;
 
@@ -59,13 +61,17 @@ public class WebManager : MonoBehaviour
     public UserData SetUserData(string data)
     {
         print(data);//
+
+        CanvasInteraction.rights_data = data.Contains("\"rights\":\"admin\"");
+        print(CanvasInteraction.rights_data);//
+
         return JsonUtility.FromJson<UserData>(data);
     }
 
     private void Start()
     {
         userData.error = new Error() { errorText = "text", isError = true };
-        userData.playerData = new Player("Sanya");
+        userData.playerData = new Player("New User");
     }
 
     public void Login(string login, string password)
@@ -74,16 +80,16 @@ public class WebManager : MonoBehaviour
         Logging(login, password);
     }
 
-    public void Registration(string login, string password1, string password2, string nickname)
+    public void Registration(string login, string password1, string password2, string rights)
     {
         StopAllCoroutines();
-        Registering(login, password1, password2, nickname);
+        Registering(login, password1, password2, rights);
     }
 
-    public void SaveData(int id, string nickname)
+    public void SaveData(int id, string rights)
     {
         StopAllCoroutines();
-        SaveProgress(id, nickname);
+        SaveProgress(id, rights);
     }
 
     public void Logging(string login, string password)
@@ -95,23 +101,23 @@ public class WebManager : MonoBehaviour
         StartCoroutine(SendData(form, RequestType.logging));
     }
 
-    public void Registering(string login, string password1, string password2, string nickname)
+    public void Registering(string login, string password1, string password2, string rights)
     {
         WWWForm form = new WWWForm();
         form.AddField("type", RequestType.register.ToString());
         form.AddField("login", login);
         form.AddField("password1", password1);
         form.AddField("password2", password2);
-        form.AddField("nickname", nickname);
+        form.AddField("rights", rights);
         StartCoroutine(SendData(form, RequestType.register));
     }
 
-    public void SaveProgress(int id, string nickname)
+    public void SaveProgress(int id, string rights)
     {
         WWWForm form = new WWWForm();
         form.AddField("type", RequestType.save.ToString());
         form.AddField("id", id);
-        form.AddField("nickname", nickname);
+        form.AddField("rights", rights);
         StartCoroutine(SendData(form, RequestType.save));
     }
 

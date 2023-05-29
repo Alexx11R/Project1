@@ -16,26 +16,17 @@ public class CanvasInteraction : MonoBehaviour
     public int mode = 1;// 0 - authoriz, 1 - menu, 2 - game, 3 - map
     CharacterController controller;
     Teleport t;
-    // PipeInfo p;
-    public WebManager manager;
-    //public string name;
-
+    public static bool rights_data; //права пользователя из БД
 
     void Start()
     {
-        print("OK");
         controller = player.GetComponent<CharacterController>();
         t = player.GetComponent<Teleport>();
-       // p = player.GetComponent<PipeInfo>();
         MenuCanvas.SetActive(true);
         GameCanvas.SetActive(false);
         MapCanvas.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
-        manager = GetComponent<WebManager>();
-        //name = manager.nickname;
-       // print(name);
     }
 
     public void StartGame()
@@ -148,7 +139,7 @@ public class CanvasInteraction : MonoBehaviour
 
     public void QuitGAme()
     {
-        Debug.Log("Exit");
+        Debug.Log("Exit"); //
         Application.Quit();
     }
 }
