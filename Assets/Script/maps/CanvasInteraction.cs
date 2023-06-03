@@ -5,14 +5,17 @@ using UnityEngine;
 public class CanvasInteraction : MonoBehaviour
 {
     [SerializeField]
-    public GameObject MenuCanvas;
+    public GameObject AdminInterface;
+    public GameObject UserInterface;
     public GameObject GameCanvas;
     public GameObject MapCanvas;
     public GameObject player;
-    public GameObject ContinueImage;
-    public GameObject StartImage;
+    public GameObject ContinueImageAd;
+    public GameObject ContinueImageUs;
+    public GameObject StartImageAd;
+    public GameObject StartImageUs;
     public bool _clickpoint; // проверка на нажатие метки на карте
-    public bool active_info;
+    public bool active_info; //вывод чертежа
     public int mode = 1;// 0 - authoriz, 1 - menu, 2 - game, 3 - map
     CharacterController controller;
     Teleport t;
@@ -20,9 +23,19 @@ public class CanvasInteraction : MonoBehaviour
 
     void Start()
     {
+        if (!rights_data)
+        {
+            UserInterface.SetActive(true);
+            AdminInterface.SetActive(false);
+        }
+        else
+        {
+            UserInterface.SetActive(false);
+            AdminInterface.SetActive(true);
+        }
         controller = player.GetComponent<CharacterController>();
         t = player.GetComponent<Teleport>();
-        MenuCanvas.SetActive(true);
+
         GameCanvas.SetActive(false);
         MapCanvas.SetActive(false);
         Cursor.visible = true;
@@ -32,10 +45,21 @@ public class CanvasInteraction : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1f;
-        StartImage.SetActive(false);
-        ContinueImage.SetActive(true);
-        ContinueImage.transform.localScale = new Vector2(1f, 1f);
-        MenuCanvas.SetActive(false);
+        StartImageAd.SetActive(false);
+        StartImageUs.SetActive(false);
+        ContinueImageAd.SetActive(true);
+        ContinueImageUs.SetActive(true);
+        ContinueImageAd.transform.localScale = new Vector2(1f, 1f);
+        ContinueImageUs.transform.localScale = new Vector2(1f, 1f);
+        if (!rights_data)
+        {
+            UserInterface.SetActive(false);
+        }
+        else
+        {
+            AdminInterface.SetActive(false);
+        }
+        //UserInterface.SetActive(false);
         GameCanvas.SetActive(true);
         MapCanvas.SetActive(false);
         mode = 2;
@@ -52,7 +76,15 @@ public class CanvasInteraction : MonoBehaviour
         {
             Time.timeScale = 1f;
             controller.enabled = true;
-            MenuCanvas.SetActive(false);
+            if (!rights_data)
+            {
+                UserInterface.SetActive(false);
+            }
+            else
+            {
+                AdminInterface.SetActive(false);
+            }
+            //UserInterface.SetActive(false);
             GameCanvas.SetActive(true);
             MapCanvas.SetActive(false);
             Cursor.visible = false;
@@ -61,7 +93,7 @@ public class CanvasInteraction : MonoBehaviour
             active_info = true;
             _clickpoint = false;
             t.clickpoint = _clickpoint;
-           
+
         }
 
         if (Input.GetKeyDown(KeyCode.M))
@@ -72,12 +104,20 @@ public class CanvasInteraction : MonoBehaviour
                 controller.enabled = false;
                 mode = 3;
                 active_info = false;
-                MenuCanvas.SetActive(false);
+                if (!rights_data)
+                {
+                    UserInterface.SetActive(false);
+                }
+                else
+                {
+                    AdminInterface.SetActive(false);
+                }
+                //UserInterface.SetActive(false);
                 GameCanvas.SetActive(false);
                 MapCanvas.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-               
+
             }
             else
             {
@@ -85,7 +125,15 @@ public class CanvasInteraction : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                     controller.enabled = true;
-                    MenuCanvas.SetActive(false);
+                    if (!rights_data)
+                    {
+                        UserInterface.SetActive(false);
+                    }
+                    else
+                    {
+                        AdminInterface.SetActive(false);
+                    }
+                    //UserInterface.SetActive(false);
                     GameCanvas.SetActive(true);
                     MapCanvas.SetActive(false);
                     Cursor.visible = false;
@@ -103,7 +151,15 @@ public class CanvasInteraction : MonoBehaviour
                 Time.timeScale = 0f;
                 controller.enabled = true;
                 GameCanvas.SetActive(false);
-                MenuCanvas.SetActive(true);
+                if (!rights_data)
+                {
+                    UserInterface.SetActive(true);
+                }
+                else
+                {
+                    AdminInterface.SetActive(true);
+                }
+                //UserInterface.SetActive(true);
                 MapCanvas.SetActive(false);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -111,10 +167,18 @@ public class CanvasInteraction : MonoBehaviour
                 active_info = false;
             }
             else if (mode == 1)
-                {
+            {
                 Time.timeScale = 1f;
                 controller.enabled = true;
-                MenuCanvas.SetActive(false);
+                if (!rights_data)
+                {
+                    UserInterface.SetActive(false);
+                }
+                else
+                {
+                    AdminInterface.SetActive(false);
+                }
+                //UserInterface.SetActive(false);
                 GameCanvas.SetActive(true);
                 MapCanvas.SetActive(false);
                 Cursor.visible = false;
@@ -123,10 +187,18 @@ public class CanvasInteraction : MonoBehaviour
                 active_info = true;
             }
             else if (mode == 3)
-                 {
+            {
                 Time.timeScale = 1f;
                 controller.enabled = true;
-                MenuCanvas.SetActive(false);
+                if (!rights_data)
+                {
+                    UserInterface.SetActive(false);
+                }
+                else
+                {
+                    AdminInterface.SetActive(false);
+                }
+                //UserInterface.SetActive(false);
                 GameCanvas.SetActive(true);
                 MapCanvas.SetActive(false);
                 Cursor.visible = false;
