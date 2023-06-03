@@ -23,7 +23,7 @@ public class CanvasInteraction : MonoBehaviour
 
     void Start()
     {
-        if (!rights_data) //получены права не администратора
+        if (!rights_data) //получены права пользователя
         {
             UserInterface.SetActive(true);
             AdminInterface.SetActive(false);
