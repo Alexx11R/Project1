@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CanvasInteraction : MonoBehaviour
 {
     [SerializeField]
@@ -60,7 +60,7 @@ public class CanvasInteraction : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+    private bool mouseClicked = false;
     void Update()
     {
         _clickpoint = t.clickpoint;
@@ -158,11 +158,25 @@ public class CanvasInteraction : MonoBehaviour
                 active_info = true;
             }
         }
+        if (Input.GetMouseButtonDown(1) && !mouseClicked)// добавление обработки нажатия ПКМ 
+        {
+            mouseClicked = true;
+        }
+        if (mouseClicked)
+        {
+            ChangeScene();
+            mouseClicked = false;
+        }
+    }
+
+private void ChangeScene() //метод для перехода на другю сцену
+    {
+        SceneManager.LoadScene("Download");
     }
 
     public void QuitGAme()
     {
-        Debug.Log("Exit"); //
+        Debug.Log("Exit"); 
         Application.Quit();
     }
 }
