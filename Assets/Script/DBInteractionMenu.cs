@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-public class DBIneratcr : MonoBehaviour
+public class DBInteractionMenu : MonoBehaviour
 {
     [System.Serializable]
     public class MenuLogin
@@ -15,15 +14,13 @@ public class DBIneratcr : MonoBehaviour
     [System.Serializable]
     public class MenuRegistration
     {
-        public TMP_Text login, password1, password2, nickname;
+        public TMP_Text login, password1, password2, rights;
     }
 
     public MenuLogin loginWindow;
     public MenuRegistration registrationWindow;
 
     [SerializeField] private WebManager webManager;
-
-    int numberScenes;
 
     public void Login()
     {
@@ -32,12 +29,8 @@ public class DBIneratcr : MonoBehaviour
 
     public void Register()
     {
-        webManager.Registration(registrationWindow.login.text, registrationWindow.password1.text, registrationWindow.password2.text, registrationWindow.nickname.text);
+        webManager.Registration(registrationWindow.login.text, registrationWindow.password1.text, registrationWindow.password2.text, registrationWindow.rights.text);
     }
 
-    public void Enter(int numberScenes)
-    {
-        SceneManager.LoadScene(numberScenes);
-    }
 }
 
