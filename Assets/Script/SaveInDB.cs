@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DBLoader : MonoBehaviour
+public class SaveInDB : MonoBehaviour
 {
 
     [SerializeField] private TMP_InputField rightsInput;
