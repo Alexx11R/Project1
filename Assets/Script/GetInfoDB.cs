@@ -12,8 +12,13 @@ public class GetInfoDB : MonoBehaviour
 
     [SerializeField] private TMP_InputField idInput;
 
-    string[] str_data = { "" };//
-    List<string> list = new List<string>();//
+    string[] str_data_id = { "" };//
+    string[] str_data_rights = { "" };//
+    List<string> list_id = new List<string>();//
+    List<string> list_rights = new List<string>();//
+
+    public static string load_id = "";
+    public static string load_rights = "";
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +27,29 @@ public class GetInfoDB : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void LoadData()
+    public void LoadData() //выбор пользователя по id
     {
-        for (int j = 0; j < str_data.Length; j++)
+        for (int j = 0; j < str_data_id.Length; j++)
         {
-            if(str_data[j] == idInput.text) print(str_data[j]);
+            if (str_data_id[j] == idInput.text)
+            {
+                load_id = str_data_id[j];
+                load_rights = str_data_rights[j];
+            }
             //else print("Такого пользователя нет");
         }
+        if (load_id != "")
+        {
+            //print(load_id + " " + load_rights);
+            SaveInDB.data_id = load_id;
+            DeleteInDB.data_id_del = load_id;
+            SaveInDB.data_rights = load_rights;
+            load_id = "";
+            load_rights = "";
+
+           // print(DeleteInDB.data_id_del);
+        }
+        else print("Данный id не найден!");
     }
 
     IEnumerator GetRequest(string uri)
@@ -73,8 +94,10 @@ public class GetInfoDB : MonoBehaviour
                             inform.GetComponent<UserInfoDB>().password.text = user_info[1];
 
                             
-                            list.Add(user_info[0]);
-                            str_data = list.ToArray();
+                            list_id.Add(user_info[0]);
+                            list_rights.Add(user_info[1]);
+                            str_data_id = list_id.ToArray();
+                            str_data_rights = list_rights.ToArray();
                             
                         }
                     }

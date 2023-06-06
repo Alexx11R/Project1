@@ -50,7 +50,7 @@ public class WebManager : MonoBehaviour
 
     public enum RequestType
     {
-        logging, register, save
+        logging, register, save, delete
     }
 
     public string GetUserData(UserData data)
@@ -92,6 +92,12 @@ public class WebManager : MonoBehaviour
         SaveProgress(id, rights);
     }
 
+    public void DeleteData(int id)
+    {
+        StopAllCoroutines();
+        DeleteProgress(id);
+    }
+
     public void Logging(string login, string password)
     {
         WWWForm form = new WWWForm();
@@ -121,6 +127,14 @@ public class WebManager : MonoBehaviour
         StartCoroutine(SendData(form, RequestType.save));
     }
 
+    public void DeleteProgress(int id)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("type", RequestType.delete.ToString());
+        form.AddField("id", id);
+        StartCoroutine(SendData(form, RequestType.delete));
+    }
+
     IEnumerator SendData(WWWForm form, RequestType type)
     {
         using (UnityWebRequest www = UnityWebRequest.Post(targetURL, form))
@@ -136,7 +150,7 @@ public class WebManager : MonoBehaviour
                 var data = SetUserData(www.downloadHandler.text);
                 if (!data.error.isError)
                 {
-                    if (type != RequestType.save)
+                    if (type != RequestType.save && type != RequestType.delete)
                     {
                         userData = data;
                         if (type == RequestType.logging)
