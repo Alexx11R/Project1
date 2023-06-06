@@ -6,16 +6,18 @@ using TMPro;
 public class UserInfoDB : MonoBehaviour
 {
     public TMP_Text login, password;
+    /*private string[] all_data;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
+           print("EEE: " + login.text);
+        //List<string> list = new List<string>();
+        //list.Add(login.text);
+        all_data = list.ToArray();
+        print("AAA: " + all_data[0]); 
+        string[] str = login.text.Split(" ");
+        print("AAA: " + str[0]);
+    }*/
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

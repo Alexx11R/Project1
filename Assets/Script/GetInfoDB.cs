@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 public class GetInfoDB : MonoBehaviour
 {
 
     public GameObject userInfoContainer;
     public GameObject userInfoTemplate;
+
+    [SerializeField] private TMP_InputField idInput;
+
+    string[] str_data = { "" };//
+    List<string> list = new List<string>();//
 
     // Start is called before the first frame update
     void Start()
@@ -16,9 +22,13 @@ public class GetInfoDB : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void LoadData()
     {
-
+        for (int j = 0; j < str_data.Length; j++)
+        {
+            if(str_data[j] == idInput.text) print(str_data[j]);
+            //else print("Такого пользователя нет");
+        }
     }
 
     IEnumerator GetRequest(string uri)
@@ -29,6 +39,9 @@ public class GetInfoDB : MonoBehaviour
 
             string[] pages = uri.Split('/');
             int page = pages.Length - 1;
+
+            //string[] str_data = {""};//
+            //List <string> list = new List<string>();//
 
             switch (webRequest.result)
             {
@@ -52,17 +65,23 @@ public class GetInfoDB : MonoBehaviour
                         if (users[i] != "")
                         {
                             string[] user_info = users[i].Split(',');
-                            Debug.Log("Login: " + user_info[0] + " Password: " + user_info[1]);
+                            Debug.Log("Id: " + user_info[0] + " Login: " + user_info[1] + " Password: " + user_info[2]);
 
                             GameObject inform = (GameObject)Instantiate(userInfoTemplate);
                             inform.transform.SetParent(userInfoContainer.transform);
                             inform.GetComponent<UserInfoDB>().login.text = user_info[0];
                             inform.GetComponent<UserInfoDB>().password.text = user_info[1];
+
+                            
+                            list.Add(user_info[0]);
+                            str_data = list.ToArray();
+                            
                         }
                     }
-
                     break;
             }
+            
+            
         }
     }
 }
