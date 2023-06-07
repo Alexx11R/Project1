@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
     public GameObject img;
 
-    void Start()
-    {
-        
-    }
     public void OnMove()
     {
         img.transform.localScale = new Vector2(1.5f, 1.5f);
@@ -19,8 +16,8 @@ public class Buttons : MonoBehaviour
         img.transform.localScale = new Vector2(1f, 1f);
     }
 
-    void Update()
+    public void ChangeScene(int numberScenes)
     {
-        
+        SceneManager.LoadScene(numberScenes);
     }
 }

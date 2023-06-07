@@ -86,16 +86,16 @@ public class GetInfoDB : MonoBehaviour
                         if (users[i] != "")
                         {
                             string[] user_info = users[i].Split(',');
-                            Debug.Log("Id: " + user_info[0] + " Login: " + user_info[1] + " Password: " + user_info[2]);
+                            Debug.Log("Id: " + user_info[0] + " Login: " + user_info[1] + " Password: " + user_info[2] + " Rights: " + user_info[3]);
 
                             GameObject inform = (GameObject)Instantiate(userInfoTemplate);
                             inform.transform.SetParent(userInfoContainer.transform);
                             inform.GetComponent<UserInfoDB>().login.text = user_info[0];
-                            inform.GetComponent<UserInfoDB>().password.text = user_info[1];
+                            inform.GetComponent<UserInfoDB>().password.text = user_info[3];
 
                             
                             list_id.Add(user_info[0]);
-                            list_rights.Add(user_info[1]);
+                            list_rights.Add(user_info[3]);
                             str_data_id = list_id.ToArray();
                             str_data_rights = list_rights.ToArray();
                             
