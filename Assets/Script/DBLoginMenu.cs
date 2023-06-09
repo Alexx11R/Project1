@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class LoginMenu : MonoBehaviour
+public class DBLoginMenu : MonoBehaviour
 {
     [System.Serializable]
     public class MenuLogin
@@ -12,15 +12,8 @@ public class LoginMenu : MonoBehaviour
         public TMP_Text login, password;
     }
 
-    [System.Serializable]
-    public class MenuRegistration
-    {
-        public TMP_Text login, password1, password2, nickname;
-    }
-
     public MenuLogin loginWindow;
-    public MenuRegistration registrationWindow;
-
+  
     [SerializeField] private WebManager webManager;
 
     int numberScenes;
@@ -28,11 +21,6 @@ public class LoginMenu : MonoBehaviour
     public void Login()
     {
         webManager.Login(loginWindow.login.text, loginWindow.password.text);
-    }
-
-    public void Register()
-    {
-        webManager.Registration(registrationWindow.login.text, registrationWindow.password1.text, registrationWindow.password2.text, registrationWindow.nickname.text);
     }
 
     public void Enter(int numberScenes)

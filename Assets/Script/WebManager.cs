@@ -22,18 +22,35 @@ public class Error
 public class Player
 {
     public int id;
+    public string login;
+    public string password;
+    public string surname;
+    public string name;
+    public string patronymic;
     public string rights;
+   
 
     public Player()
     {
 
     }
 
-    public Player(string _rights)                 
+    public Player(int _id, string _login, string _password, string _surname, string _name, string _patronymic, string _rights)                 
     {
+        id = _id;
+        login = _login;
+        password = _password;
+        surname = _surname;
+        name = _name;
+        patronymic = _patronymic;
         rights = _rights;
     }
 
+    public void SetLogin(string log) => login = log;
+    public void SetPassword(string pass) => password = pass;
+    public void SetSurname(string sur) => surname = sur;
+    public void SetName(string nam) => name = nam;
+    public void SetPatronymic(string patr) => patronymic = patr;
     public void SetRights(string rigt) => rights = rigt;
 }
 
@@ -41,12 +58,8 @@ public class WebManager : MonoBehaviour
 {
     public static UserData userData = new UserData();
 
-    
-
     [SerializeField] private string targetURL;
-
     [SerializeField] private UnityEvent OnLogged, OnRegistered;
-
 
     public enum RequestType
     {
@@ -71,7 +84,7 @@ public class WebManager : MonoBehaviour
     private void Start()
     {
         userData.error = new Error() { errorText = "text", isError = true };
-        userData.playerData = new Player("New User");
+        userData.playerData = new Player(0, "Login", "Password", "Surname", "Name", "Patronymic", "New Rights");
     }
 
     public void Login(string login, string password)
@@ -80,16 +93,16 @@ public class WebManager : MonoBehaviour
         Logging(login, password);
     }
 
-    public void Registration(string login, string password1, string password2, string rights)
+    public void Registration(string login, string password1, string password2, string surname, string name, string patronymic, string rights)
     {
         StopAllCoroutines();
-        Registering(login, password1, password2, rights);
+        Registering(login, password1, password2, surname, name, patronymic, rights);
     }
 
-    public void SaveData(int id, string rights)
+    public void SaveData(int id, string login, string password, string surname, string name, string patronymic, string rights)
     {
         StopAllCoroutines();
-        SaveProgress(id, rights);
+        SaveProgress(id, login, password, surname, name, patronymic, rights);
     }
 
     public void DeleteData(int id)
@@ -107,22 +120,30 @@ public class WebManager : MonoBehaviour
         StartCoroutine(SendData(form, RequestType.logging));
     }
 
-    public void Registering(string login, string password1, string password2, string rights)
+    public void Registering(string login, string password1, string password2, string surname, string name, string patronymic, string rights)
     {
         WWWForm form = new WWWForm();
         form.AddField("type", RequestType.register.ToString());
         form.AddField("login", login);
         form.AddField("password1", password1);
         form.AddField("password2", password2);
+        form.AddField("surname", surname);
+        form.AddField("name", name);
+        form.AddField("patronymic", patronymic);
         form.AddField("rights", rights);
         StartCoroutine(SendData(form, RequestType.register));
     }
 
-    public void SaveProgress(int id, string rights)
+    public void SaveProgress(int id, string login, string password, string surname, string name, string patronymic, string rights)
     {
         WWWForm form = new WWWForm();
         form.AddField("type", RequestType.save.ToString());
         form.AddField("id", id);
+        form.AddField("login", login);
+        form.AddField("password", password);
+        form.AddField("surname", surname);
+        form.AddField("name", name);
+        form.AddField("patronymic", patronymic);
         form.AddField("rights", rights);
         StartCoroutine(SendData(form, RequestType.save));
     }

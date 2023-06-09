@@ -27,10 +27,10 @@ public class DBInteractionMenu : MonoBehaviour
         webManager.Login(loginWindow.login.text, loginWindow.password.text);
     }
 
-    public void Register()
+    /*public void Register()
     {
         webManager.Registration(registrationWindow.login.text, registrationWindow.password1.text, registrationWindow.password2.text, registrationWindow.rights.text);
-    }
+    }*/
 
 }
 
