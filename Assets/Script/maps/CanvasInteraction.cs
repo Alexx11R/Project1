@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class CanvasInteraction : MonoBehaviour
 {
     [SerializeField]
@@ -169,7 +170,7 @@ public class CanvasInteraction : MonoBehaviour
         }
     }
 
-private void ChangeScene() //метод для перехода на другю сцену
+    private void ChangeScene() //метод для перехода на другю сцену
     {
       
         Cursor.visible = true;
