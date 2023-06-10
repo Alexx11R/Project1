@@ -171,6 +171,9 @@ public class CanvasInteraction : MonoBehaviour
 
 private void ChangeScene() //метод для перехода на другю сцену
     {
+      
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("Download");
     }
 
