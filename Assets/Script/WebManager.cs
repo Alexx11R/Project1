@@ -75,7 +75,7 @@ public class WebManager : MonoBehaviour
     {
         print(data);//
 
-        CanvasInteraction.rights_data = data.Contains("\"rights\":\"admin\"");
+        CanvasInteraction.rights_data = data.Contains("rights\":\"admin");
         print(CanvasInteraction.rights_data);//
 
         return JsonUtility.FromJson<UserData>(data);
