@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PipeInfo : MonoBehaviour
 {
     [SerializeField]
     private GameObject obj;
+    private Image img;
     //private GameObject player;
     public bool isImage;
     public bool inDist = false;
@@ -48,6 +50,7 @@ public class PipeInfo : MonoBehaviour
         {
             GUI.Box(new Rect(10, 10, 400, 100), Info);
            if (isImage) GUI.Box(new Rect(10, 55, 400, 250), content);
+            GUI.Box(new Rect(1000, 55, 400, 250), content);
             GUI.enabled = true;
         }
         else GUI.enabled = false;
